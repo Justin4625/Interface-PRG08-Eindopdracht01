@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zwaard, Schild Battle</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer type="module" src="./script.js"></script>
+  <script defer type="module" src="./game.js"></script>
+  <script src="https://unpkg.com/ml5@1/dist/ml5.min.js"></script>
+</head>
+
+<body class="bg-gray-900 text-white font-sans min-h-screen flex flex-col items-center justify-center">
+<section class="w-full max-w-4xl p-4 mt-12 flex justify-between">
+  <!-- Blauwe box -->
+  <div class="bg-blue-600 text-white p-6 rounded shadow-lg w-1/2 mr-2">
+    <div id="predictionDiv" class="text-2xl font-bold bg-gray-800 text-yellow-400 p-4 rounded shadow-lg mb-4">
+      Ready to predict...
+    </div>
+    <div class="flex justify-center mb-4">
+      <button id="webcamButton" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg">
+        Start Webcam
+      </button>
+    </div>
+    <div class="videoView relative mx-auto border-4 border-gray-700 rounded-lg overflow-hidden">
+      <video id="webcam" class="absolute top-0 left-0 w-full h-full object-cover" muted autoplay playsinline></video>
+      <canvas id="output_canvas" class="absolute top-0 left-0 w-full h-full"></canvas>
+      <div id="myimage" class="absolute"></div>
+    </div>
+    <p class="text-lg">Prediction: <span id="predictionText">None</span></p>
+  </div>
+
+  <!-- Rode box -->
+  <div class="bg-red-600 text-white p-6 rounded shadow-lg w-1/2 ml-2">
+    <h2 class="text-2xl font-bold mb-4">Game Interface</h2>
+    <p id="playerHealth" class="text-lg">Player Health: 10</p>
+    <p id="npcHealth" class="text-lg">NPC Health: 10</p>
+    <p id="playerAction" class="text-lg">Player Action: None</p>
+    <p id="npcAction" class="text-lg">NPC Action: None</p>
+    <p id="result" class="text-lg">Result: None</p>
+  </div>
+  <p id="cooldownTimer" class="text-lg">Cooldown: Ready</p>
+</section>
+</body>
+
+</html>
