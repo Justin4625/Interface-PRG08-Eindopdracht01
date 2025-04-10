@@ -1,5 +1,5 @@
-let player = { health: 10, charge: 0, shieldCooldown: 0 };
-let npc = { health: 10, charge: 0, shieldCooldown: 0 };
+let player = { health: 10, charge: 0 };
+let npc = { health: 10, charge: 0 };
 
 const playerActionDisplay = document.getElementById("playerAction");
 const npcActionDisplay = document.getElementById("npcAction");
