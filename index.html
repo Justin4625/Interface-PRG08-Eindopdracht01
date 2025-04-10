@@ -15,6 +15,7 @@
 <p id="cooldownTimer" class="text-lg font-semibold bg-gray-800 text-yellow-400 py-2 px-4 rounded-lg shadow-md inline-block">
   Countdown: Ready
 </p>
+
 <section class="w-full max-w-4xl p-6 mt-1 flex flex-col md:flex-row justify-between gap-6">
   <!-- Blue box with Player Health above -->
   <div class="w-full md:w-1/2">
@@ -50,6 +51,23 @@
       <div class="space-y-2">
         <p id="npcAction" class="text-lg font-semibold">NPC Action: None</p>
       </div>
+    </div>
+    <div class="mt-6 p-4 bg-gray-800 text-white rounded-lg shadow-md">
+      <h3 class="text-xl font-bold mb-4 text-center">Game Logica</h3>
+      <ul class="space-y-2">
+        <li class="flex items-center">
+          <span class="text-2xl mr-2">🗡️</span>
+          <span>Zwaard: 1 damage</span>
+        </li>
+        <li class="flex items-center">
+          <span class="text-2xl mr-2">🛡️</span>
+          <span>Schild: 50% kans op 0 damage van de tegenstander. Bij succes ontvangt de tegenstander 1 damage</span>
+        </li>
+        <li class="flex items-center">
+          <span class="text-2xl mr-2">⚡</span>
+          <span>Charge: +1 damage op de volgende zwaard aanval (stackable)</span>
+        </li>
+      </ul>
     </div>
   </div>
 </section>

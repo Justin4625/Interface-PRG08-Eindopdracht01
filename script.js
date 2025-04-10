@@ -57,16 +57,16 @@ async function enableCam() {
 
 function startCooldown(seconds) {
     let remainingTime = seconds;
-    cooldownTimer.textContent = `Cooldown: ${remainingTime}s`;
+    cooldownTimer.textContent = `Countdown: ${remainingTime}s`;
 
     const interval = setInterval(() => {
         remainingTime--;
-        cooldownTimer.textContent = `Cooldown: ${remainingTime}s`;
+        cooldownTimer.textContent = `Countdown: ${remainingTime}s`;
 
         if (remainingTime <= 0) {
             clearInterval(interval);
-            cooldownTimer.textContent = "Cooldown: Ready";
-            actionCooldown = false; // cooldown reset
+            cooldownTimer.textContent = "Countdown: Ready";
+            actionCooldown = false;
         }
     }, 1000);
 }

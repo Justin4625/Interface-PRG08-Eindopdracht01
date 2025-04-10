@@ -40,8 +40,9 @@ export function turnLogic(playerAction, npcAction) {
             result = `Player attacked with a sword! NPC was charging and takes ${playerDamage} damage.`;
         }
 
-        player.charge = 0; // Reset player charge
-        npc.charge = 0; // Reset NPC charge
+        player.charge = 0;
+        npc.charge = 0;
+
     } else if (playerAction === "🛡️ Schild") {
         if (npcAction === "🗡️ Zwaard") {
             const npcDamage = 1 + npc.charge;
@@ -55,6 +56,7 @@ export function turnLogic(playerAction, npcAction) {
         } else {
             result = `Player used a shield. No effect.`;
         }
+
     } else if (playerAction === "⚡ Charge") {
         player.charge++;
         if (npcAction === "🗡️ Zwaard") {
