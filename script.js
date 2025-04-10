@@ -102,8 +102,8 @@ async function predictWebcam() {
                         predictionDiv.innerHTML = 'Player Action: Schild 🛡️';
                         break;
                     case "Charge":
-                        playerAction = "⚡ Charge";
-                        predictionDiv.innerHTML = 'Player Action: Charge ⚡';
+                        playerAction = "✊ Charge";
+                        predictionDiv.innerHTML = 'Player Action: Charge ✊';
                         break;
                     default:
                         predictionDiv.innerHTML = 'No valid action detected';

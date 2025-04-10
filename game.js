@@ -13,7 +13,7 @@ function updateHealth() {
 }
 
 export function npcChooseAction() {
-    const actions = ["🗡️ Zwaard", "🛡️ Schild", "⚡ Charge"];
+    const actions = ["🗡️ Zwaard", "🛡️ Schild", "✊ Charge"];
     return actions[Math.floor(Math.random() * actions.length)];
 }
 
@@ -35,7 +35,7 @@ export function turnLogic(playerAction, npcAction) {
                 npc.health -= playerDamage;
                 result = `Player attacked with a sword! NPC tried to block, but failed! NPC takes ${playerDamage} damage.`;
             }
-        } else if (npcAction === "⚡ Charge") {
+        } else if (npcAction === "✊ Charge") {
             npc.health -= playerDamage;
             result = `Player attacked with a sword! NPC was charging and takes ${playerDamage} damage.`;
         }
@@ -57,13 +57,13 @@ export function turnLogic(playerAction, npcAction) {
             result = `Player used a shield. No effect.`;
         }
 
-    } else if (playerAction === "⚡ Charge") {
+    } else if (playerAction === "✊ Charge") {
         player.charge++;
         if (npcAction === "🗡️ Zwaard") {
             const npcDamage = 1 + npc.charge;
             player.health -= npcDamage;
             result = `Player charged, but NPC attacked with a sword! Player takes ${npcDamage} damage.`;
-        } else if (npcAction === "⚡ Charge") {
+        } else if (npcAction === "✊ Charge") {
             npc.charge++;
             result = `Both charged up!`;
         } else {
