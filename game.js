@@ -35,12 +35,13 @@ export function turnLogic(playerAction, npcAction) {
                 npc.health -= playerDamage;
                 result = `Player attacked with a sword! NPC tried to block, but failed! NPC takes ${playerDamage} damage.`;
             }
-        } else if (npcAction === "⚡ Lading") {
+        } else if (npcAction === "⚡ Charge") {
             npc.health -= playerDamage;
-            result = `Player attacked with a sword! NPC takes ${playerDamage} damage.`;
+            result = `Player attacked with a sword! NPC was charging and takes ${playerDamage} damage.`;
         }
 
-        player.charge = 0;
+        player.charge = 0; // Reset player charge
+        npc.charge = 0; // Reset NPC charge
     } else if (playerAction === "🛡️ Schild") {
         if (npcAction === "🗡️ Zwaard") {
             const npcDamage = 1 + npc.charge;
@@ -54,14 +55,13 @@ export function turnLogic(playerAction, npcAction) {
         } else {
             result = `Player used a shield. No effect.`;
         }
-    } else if (playerAction === "⚡ Lading") {
+    } else if (playerAction === "⚡ Charge") {
         player.charge++;
         if (npcAction === "🗡️ Zwaard") {
             const npcDamage = 1 + npc.charge;
             player.health -= npcDamage;
             result = `Player charged, but NPC attacked with a sword! Player takes ${npcDamage} damage.`;
-        } else if (npcAction === "⚡ Lading") {
-            player.charge++;
+        } else if (npcAction === "⚡ Charge") {
             npc.charge++;
             result = `Both charged up!`;
         } else {
