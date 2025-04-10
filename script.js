@@ -3,7 +3,7 @@ import {
     FilesetResolver,
     DrawingUtils
 } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.18";
-import { npcChooseAction, resolveTurn } from './game.js';
+import { npcChooseAction, turnLogic } from './game.js';
 
 ml5.setBackend("webgl");
 
@@ -20,11 +20,11 @@ const video = document.getElementById("webcam");
 const canvasElement = document.getElementById("output_canvas");
 const canvasCtx = canvasElement.getContext("2d");
 const drawUtils = new DrawingUtils(canvasCtx);
+const cooldownTimer = document.getElementById("cooldownTimer");
 
 let handLandmarker = undefined;
 let webcamRunning = false;
 let actionCooldown = false;
-const cooldownTimer = document.getElementById("cooldownTimer");
 
 const createHandLandmarker = async () => {
     const vision = await FilesetResolver.forVisionTasks("https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.0/wasm");
@@ -66,7 +66,7 @@ function startCooldown(seconds) {
         if (remainingTime <= 0) {
             clearInterval(interval);
             cooldownTimer.textContent = "Cooldown: Ready";
-            actionCooldown = false; // Reset cooldown
+            actionCooldown = false; // cooldown reset
         }
     }, 1000);
 }
@@ -102,7 +102,7 @@ async function predictWebcam() {
                         predictionDiv.innerHTML = 'Player Action: Schild 🛡️';
                         break;
                     case "Charge":
-                        playerAction = "⚡ Lading";
+                        playerAction = "⚡ Charge";
                         predictionDiv.innerHTML = 'Player Action: Charge ⚡';
                         break;
                     default:
@@ -112,14 +112,10 @@ async function predictWebcam() {
 
                 if (playerAction && !actionCooldown) {
                     actionCooldown = true; // Start cooldown
-                    const npcAction = npcChooseAction(); // NPC kiest direct een actie
-                    resolveTurn(playerAction, npcAction); // Los de beurt direct op
-
-                    // Update de interface met NPC-actie
+                    const npcAction = npcChooseAction();
+                    turnLogic(playerAction, npcAction);
                     predictionDiv.innerHTML += `<br>NPC Action: ${npcAction}`;
-
-                    // Start de cooldown na de beurt
-                    startCooldown(5); // Start 10-seconden timer
+                    startCooldown(5);
                 }
             }
         }

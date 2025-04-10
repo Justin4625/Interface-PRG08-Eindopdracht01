@@ -1,35 +1,25 @@
-// Game state
 let player = { health: 10, charge: 0, shieldCooldown: 0 };
 let npc = { health: 10, charge: 0, shieldCooldown: 0 };
 
-// Possible actions
-const actions = ["🗡️ Zwaard", "🛡️ Schild", "⚡ Lading"];
-
-// DOM elements
 const playerActionDisplay = document.getElementById("playerAction");
 const npcActionDisplay = document.getElementById("npcAction");
 const resultDisplay = document.getElementById("result");
 const playerHealthDisplay = document.getElementById("playerHealth");
 const npcHealthDisplay = document.getElementById("npcHealth");
-const predictionDiv = document.getElementById("predictionDiv");
 
-// Update health display
 function updateHealth() {
     playerHealthDisplay.textContent = `Player Health: ${player.health}`;
     npcHealthDisplay.textContent = `NPC Health: ${npc.health}`;
 }
 
-// NPC chooses a random action
 export function npcChooseAction() {
-    const actions = ["🗡️ Zwaard", "🛡️ Schild", "⚡ Lading"];
+    const actions = ["🗡️ Zwaard", "🛡️ Schild", "⚡ Charge"];
     return actions[Math.floor(Math.random() * actions.length)];
 }
 
-// Resolve a turn
-export function resolveTurn(playerAction, npcAction) {
+export function turnLogic(playerAction, npcAction) {
     let result = "";
 
-    // Player vs NPC logic
     if (playerAction === "🗡️ Zwaard") {
         const playerDamage = 1 + player.charge;
         const npcDamage = 1 + npc.charge;
@@ -50,7 +40,7 @@ export function resolveTurn(playerAction, npcAction) {
             result = `Player attacked with a sword! NPC takes ${playerDamage} damage.`;
         }
 
-        player.charge = 0; // Reset charge after sword attack
+        player.charge = 0;
     } else if (playerAction === "🛡️ Schild") {
         if (npcAction === "🗡️ Zwaard") {
             const npcDamage = 1 + npc.charge;
@@ -79,13 +69,11 @@ export function resolveTurn(playerAction, npcAction) {
         }
     }
 
-    // Update displays
     playerActionDisplay.textContent = `Player Action: ${playerAction}`;
     npcActionDisplay.textContent = `NPC Action: ${npcAction}`;
     resultDisplay.textContent = result;
     updateHealth();
 
-    // Check for game over
     if (player.health <= 0 || npc.health <= 0) {
         const winner = player.health > 0 ? "Player" : "NPC";
         alert(`${winner} wins!`);
@@ -93,15 +81,13 @@ export function resolveTurn(playerAction, npcAction) {
     }
 }
 
-// Reset the game
 function resetGame() {
-    player = { health: 10, charge: 0, shieldCooldown: 0 };
-    npc = { health: 10, charge: 0, shieldCooldown: 0 };
+    player = { health: 10, charge: 0 };
+    npc = { health: 10, charge: 0 };
     updateHealth();
     playerActionDisplay.textContent = "Player Action: None";
     npcActionDisplay.textContent = "NPC Action: None";
     resultDisplay.textContent = "Result: None";
 }
 
-// Initialize game
 updateHealth();
